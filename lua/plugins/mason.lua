@@ -11,6 +11,7 @@ return {
       "gopls",
       "typescript-language-server",
       "intelephense", -- PHP LSP
+      -- "rust-analyzer", -- Rust LSP - Manually managed (pinned to 2025-12-15)
 
       -- Formatters (for conform.nvim and general use)
       "stylua",

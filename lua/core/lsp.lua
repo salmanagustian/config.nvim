@@ -3,6 +3,7 @@ vim.lsp.enable({
   "ts_ls",
   "gopls",
   "intelephense",
+  "rust_analyzer",
 })
 
 vim.diagnostic.config({

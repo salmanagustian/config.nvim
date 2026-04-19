@@ -92,7 +92,7 @@ return {
       })
 
       -- setup must be called before loading
-      vim.cmd.colorscheme("catppuccin")
+      -- vim.cmd.colorscheme("catppuccin")
     end,
   },
   {
@@ -103,19 +103,20 @@ return {
       -- vim.g.gruvbox_material_background = "hard"
       vim.g.gruvbox_material_foreground = "mix"
       vim.g.gruvbox_material_disable_cursorline = 1
-      vim.g.gruvbox_material_ui_contrast = "high"
-      vim.g.gruvbox_material_float_style = "bright"
-      vim.g.gruvbox_material_statusline_style = "mix"
+      -- vim.g.gruvbox_material_ui_contrast = "high"
+      -- vim.g.gruvbox_material_float_style = "bright"
+      -- vim.g.gruvbox_material_statusline_style = "mix"
       vim.g.gruvbox_material_enable_italic = 1
       vim.g.gruvbox_material_enable_bold = 1
       vim.g.gruvbox_material_dim_inactive_windows = 1
 
-      vim.g.gruvbox_material_visual = "grey background"
-      vim.g.gruvbox_material_menu_selection_background = "red"
+      -- vim.g.gruvbox_material_visual = "grey background"
+      -- vim.g.gruvbox_material_menu_selection_background = "red"
+      -- vim.g.gruvbox_material_cursor = "red"
       -- vim.g.gruvbox_material_colors_override = { bg0 = '#16181A' } -- #0e1010
       vim.g.gruvbox_material_better_performance = 1
 
-      -- vim.cmd.colorscheme("gruvbox-material")
+      vim.cmd.colorscheme("gruvbox-material")
     end,
   },
   {

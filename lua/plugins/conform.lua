@@ -48,7 +48,7 @@ return {
       bash = { "shfmt" },
 
       -- Other (system tools)
-      -- rust = { "rustfmt" }, -- comes with Rust installation
+      rust = { "rustfmt" }, -- comes with Rust installation
 
       -- Additional file types (uncomment as needed)
       -- markdown = { "markdownlint" },

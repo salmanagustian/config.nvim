@@ -58,6 +58,14 @@ return {
     scroll = { enabled = true },
     statuscolumn = { enabled = true },
     words = { enabled = true },
+    terminal = {
+      win = {
+        style = "terminal",
+        width = 0.8,
+        height = 0.6,
+        border = "single",
+      },
+    },
     styles = {
       notification = {
         -- wo = { wrap = true } -- Wrap notifications
@@ -550,6 +558,16 @@ return {
         Snacks.notifier.hide()
       end,
       desc = "Dismiss All Notifications",
+    },
+    {
+      "<leader>ld",
+      function()
+        Snacks.terminal.toggle("cd ~/Applications/Code/experimental/lazy-dailylog && export $(cat .env | xargs) && ./lazylog", {
+          interactive = true,
+          auto_close = true,
+        })
+      end,
+      desc = "Run lazylog",
     },
     {
       "<c-/>",

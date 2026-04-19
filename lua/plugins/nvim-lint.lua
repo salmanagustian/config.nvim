@@ -14,6 +14,47 @@ return {
     -- Configure Laravel Pint for linting (using --test mode)
     local pint_cmd = vim.fn.executable(mason_bin_dir .. "/pint") == 1 and mason_bin_dir .. "/pint" or "pint"
 
+    -- Configure clippy for Rust linting
+    lint.linters.clippy = {
+      cmd = "cargo",
+      stdin = false,
+      args = { "clippy", "--message-format=json" },
+      stream = "stdout",
+      ignore_exitcode = true,
+      parser = function(output, bufnr)
+        local diagnostics = {}
+
+        if not output or output == "" then
+          return diagnostics
+        end
+
+        for _, line in ipairs(vim.fn.split(output, "\n")) do
+          local decoded = vim.json.decode(line)
+          if decoded and decoded.message and decoded.message.spans and #decoded.message.spans > 0 then
+            local span = decoded.message.spans[1]
+            local severity_map = {
+              error = vim.diagnostic.severity.ERROR,
+              warning = vim.diagnostic.severity.WARN,
+              note = vim.diagnostic.severity.INFO,
+              help = vim.diagnostic.severity.HINT,
+            }
+            table.insert(diagnostics, {
+              lnum = span.line_start - 1,
+              col = span.column_start - 1,
+              end_lnum = span.line_end - 1,
+              end_col = span.column_end - 1,
+              severity = severity_map[decoded.message.level] or vim.diagnostic.severity.WARN,
+              message = decoded.message.message,
+              code = decoded.code and decoded.code.code,
+              source = "clippy",
+            })
+          end
+        end
+
+        return diagnostics
+      end,
+    }
+
     lint.linters.pint = {
       cmd = pint_cmd,
       stdin = false,
@@ -115,9 +156,11 @@ return {
       -- PHP/Laravel
       php = { "pint" },
 
+      -- Rust
+      rust = { "clippy" },
+
       -- You can add more linters here as needed
       -- python = { "flake8", "mypy" },
-      -- rust = { "clippy" },
     }
 
     -- Auto-lint on save and text changes
